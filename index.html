@@ -10,76 +10,79 @@
             
             <a-sky color="#0082ce"></a-sky>
             
+            <!---Ground--->
             <a-plane material="color:black"
                      rotation="-90 0 0"
                      scale="100 100 1"></a-plane>
             
             <!----Hanoi tower --->
             <a-entity position="0 -1 0">
-            <!----box---->
-            <a-box color="gray" 
-                   width="1.1"
-                   height="0.05"
-                   depth="0.2"
-                   position="0 1 -1">
+                
+                <!----Base---->
+                <a-box color="gray" 
+                       width="1.1"
+                       height="0.05"
+                       depth="0.2"
+                       position="0 1 -1">
+
+                </a-box>
+                
+                <!---Rings--->
+                <a-torus color="blue"
+                         radius="0.1"
+                         radius-tubular="0.1"
+                         height="0.1"
+                         position="0 1.20 -1"
+                         rotation="90 0 0"
+                         scale="0.2 0.2 0.12"> 
+                </a-torus>
+
+                <a-torus color="yellow"
+                         radius="0.2"
+                         radius-tubular="0.1"
+                         height="0.1"
+                         position="0 1.15 -1"
+                         rotation="90 0 0"
+                         scale="0.2 0.2 0.12"> 
+                </a-torus>
+
+                <a-torus color="green"
+                         radius="0.3"
+                         radius-tubular="0.1"
+                         height="0.1"
+                         position="0 1.1 -1"
+                         rotation="90 0 0"
+                         scale="0.2 0.2 0.12"> 
+                </a-torus>
+
+                <a-torus color="red"
+                         radius="0.40"
+                         radius-tubular="0.1"
+                         height="0.1"
+                         position="0 1.05 -1"
+                         rotation="90 0 0"
+                         scale="0.2 0.2 0.12"> 
+                </a-torus>
             
-            </a-box>
-         
-            <a-torus color="blue"
-                     radius="0.1"
-                     radius-tubular="0.1"
-                     height="0.1"
-                     position="0 1.20 -1"
-                     rotation="90 0 0"
-                     scale="0.2 0.2 0.12"> 
-            </a-torus>
             
-            <a-torus color="yellow"
-                     radius="0.2"
-                     radius-tubular="0.1"
-                     height="0.1"
-                     position="0 1.15 -1"
-                     rotation="90 0 0"
-                     scale="0.2 0.2 0.12"> 
-            </a-torus>
-            
-            <a-torus color="green"
-                     radius="0.3"
-                     radius-tubular="0.1"
-                     height="0.1"
-                     position="0 1.1 -1"
-                     rotation="90 0 0"
-                     scale="0.2 0.2 0.12"> 
-            </a-torus>
-            
-            <a-torus color="red"
-                     radius="0.40"
-                     radius-tubular="0.1"
-                     height="0.1"
-                     position="0 1.05 -1"
-                     rotation="90 0 0"
-                     scale="0.2 0.2 0.12"> 
-            </a-torus>
-            
-            
-            
-            <a-cylinder position="-0.4 1.15 -1"
-                        height="0.3"
-                        radius="0.02"
-                        color="brown">
-            </a-cylinder>
-            
-            <a-cylinder position="0.4 1.15 -1"
-                        height="0.3"
-                        radius="0.02"
-                        color="brown">
-            </a-cylinder>
-            
-            <a-cylinder position="0 1.15 -1"
-                        height="0.3"
-                        radius="0.02"
-                        color="brown">
-            </a-cylinder>
+                <!---Poles--->
+                <a-cylinder position="-0.4 1.15 -1"
+                            height="0.3"
+                            radius="0.02"
+                            color="brown">
+                </a-cylinder>
+
+                <a-cylinder position="0.4 1.15 -1"
+                            height="0.3"
+                            radius="0.02"
+                            color="brown">
+                </a-cylinder>
+
+                <a-cylinder position="0 1.15 -1"
+                            height="0.3"
+                            radius="0.02"
+                            color="brown">
+                </a-cylinder>
                 
             </a-entity>
         </a-scene>
