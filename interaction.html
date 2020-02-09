@@ -8,11 +8,20 @@
 
 <body>
 	<a-scene>
+
+        <a-sky></a-sky>
+
 		<!-- Camera -->
 		<a-camera>
-			<a-entity cursor position="0 0 -1"
+			<a-entity cursor="fuse: true; fuseTimeout: 1500" position="0 0 -1"
 					  geometry="primitive: sphere; radius: 0.005"
-					  material="color: #000000; shader: flat; opacity: 0.5">
+                      material="color: #000000; shader: flat; opacity: 0.5">
+                      <a-animation attribute="scale"
+                                    to="3 3 3"
+                                    dur="1500"
+                                    begin="cursor-fusing">
+                      </a-animation>
+
 			</a-entity>
 		</a-camera>
 
