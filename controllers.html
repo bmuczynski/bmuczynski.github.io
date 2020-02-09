@@ -1,0 +1,82 @@
+<!doctype html>
+<html>
+    <head>
+        <title>L22 - Controller-based interactions</title>
+        <script src="https://aframe.io/releases/0.9.2/aframe.min.js"></script>
+        <!-- ******** NEW EVENT-SET COMPONENT VERSION FOR A-FRAME v0.9.2 ******** -->
+        <script src="https://unpkg.com/aframe-event-set-component@5.0.0/dist/aframe-event-set-component.min.js"></script>
+        <!-- ******** NEW SUPER-HANDS COMPONENT VERSION FOR A-FRAME v0.9.2 ******** -->
+        <!-- ******** With v3.0.0 you need to serve progressive-controls yourself ******** -->
+        <script src="https://unpkg.com/super-hands@3.0.0/dist/super-hands.min.js"></script>
+        <script src="js/progressive-controls.js"></script>
+    </head>
+    <body>
+        <!-- ******** For the code related to the event-set component, NOTHING HAS CHANGED WITH v0.9.2 ******** -->
+        <!-- ******** For the external components used in the lecture, you can read details on their new version in the <head> element) ******** -->
+        <!-- ******** For the code related to progressive-controls, SOME THINGS HAVE CHANGED WITH v0.9.2 ******** -->
+        <!-- Selective intersections using "objects: .UIbutton" now have to be specified directly
+             in the progressive-controls component (line 48) -->
+        <a-scene>
+            
+            <!-- ******** Unfortunately, customising the cursor created some issues with the
+                          hover-start and hover-end events (you can try and uncomment the code
+                          from line 26 to 42 to see the weird behaviour) ******** -->
+            <a-assets>
+<!--
+                <a-mixin id="progressivecontrolsgazedefault"
+                         position="0 0 -0.5" raycaster="objects: .UIbutton"
+                         cursor="fuse: true; fuseTimeout: 1000"
+                         geometry="primitive: sphere; radius: 0.0025"
+                         material="color: #999; shader: flat"
+                         super-hands="colliderEvent: raycaster-intersection;
+                                      colliderEventProperty: els;
+                                      colliderEndEvent: raycaster-intersection-cleared;
+                                      colliderEndEventProperty: el">
+                </a-mixin>
+                <a-mixin id="progressivecontrolspointdefault"
+                         line="color: #FF00FF" raycaster="showLine: true; objects: .UIbutton"
+                         super-hands="colliderEvent: raycaster-intersection;
+                                      colliderEventProperty: els;
+                                      colliderEndEvent: raycaster-intersection-cleared;
+                                      colliderEndEventProperty: el">
+                </a-mixin>
+-->
+            </a-assets>
+            
+            <!-- Progressive Controls -->
+            <!-- Selective intersections using "objects: .UIbutton" now have to be specified here -->
+            <a-entity progressive-controls="objects: .UIbutton"></a-entity>
+            
+            <!-- Screen -->
+            <a-box id="screen" color="#212121" position="0 2.75 -9" scale="8 4 0.1" hoverable
+                   event-set__rescol="_event: click; color: #212121">
+            </a-box>
+            
+            <!-- Left Button -->
+            <a-box color="#212121" position="-2.25 0 -9" scale="2 1 0.1" hoverable
+                   class="UIbutton"
+                   event-set__enter="_event: hover-start; color: #AA0000"
+                   event-set__leave="_event: hover-end; color: #212121"
+                   event-set__tarcol="_event: click; _target: #screen; color: #AA0000">
+            </a-box>
+            <!-- Center Button -->
+            <a-box color="#212121" position="0 0 -9" scale="2 1 0.1" hoverable
+                   class="UIbutton"
+                   event-set__enter="_event: hover-start; color: #FFAA00"
+                   event-set__leave="_event: hover-end; color: #212121"
+                   event-set__tarcol="_event: click; _target: #screen; color: #FFAA00">
+            </a-box>
+            <!-- Right Button -->
+            <a-box color="#212121" position="2.25 0 -9" scale="2 1 0.1" hoverable
+                   class="UIbutton"
+                   event-set__enter="_event: hover-start; color: #00AAFF"
+                   event-set__leave="_event: hover-end; color: #212121"
+                   event-set__tarcol="_event: click; _target: #screen; color: #00AAFF">
+            </a-box>
+            
+            <!-- Sky -->
+            <a-sky></a-sky>
+            
+        </a-scene>
+    </body>
+</html>

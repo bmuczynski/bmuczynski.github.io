@@ -9,24 +9,27 @@
 <body>
 	<a-scene>
 
-        <a-sky></a-sky>
+        <a-skye></a-skye>
 
 		<!-- Camera -->
 		<a-camera>
 			<a-entity cursor="fuse: true; fuseTimeout: 1500" position="0 0 -1"
 					  geometry="primitive: sphere; radius: 0.005"
-                      material="color: #000000; shader: flat; opacity: 0.5">
-                      <a-animation attribute="scale"
+                      material="color: #000000; shader: flat; opacity: 0.5"
+                      raycaster="objects: .clickable"
+                      animation__fusing="property: scale; startEvents: fusing; easing: easeInCubic; dur: 1500; from: 1 1 1; to: 3 3 3">
+                      <!--a-animation attribute="scale"
                                     to="3 3 3"
                                     dur="1500"
-                                    begin="cursor-fusing">
-                      </a-animation>
+                                    startEvents="fusing">
+                      </a-animation>-->
+                      
 
 			</a-entity>
 		</a-camera>
 
 		<!-- Left Red Box -->
-		<a-box color="#AA0000" position="-2 0 -7"
+		<a-box color="#AA0000" position="-2 0 -7" class="clickable"
 			   event-set__enter="_event: mouseenter; material.color: #FF0000"
 			   event-set__leave="_event: mouseleave; material.color: #AA0000"
 			   event-set__tarcol="_event: click; _target: #green; material.color: #00AAFF">
@@ -37,7 +40,7 @@
 		</a-box>
 
 		<!-- Center Red Box -->
-		<a-box color="#AA0000" position="0 0 -7"
+		<a-box color="#AA0000" position="0 0 -7" class="clickable"
 			   event-set__enter="_event: mouseenter; material.color: #FF0000"
 			   event-set__leave="_event: mouseleave; material.color: #AA0000"
 			   event-set__tarvis="_event: click; _target: #blue; visible: true">
@@ -48,7 +51,7 @@
 		</a-box>
 
 		<!-- Right Red Box -->
-		<a-box color="#AA0000" position="2 0 -7"
+		<a-box color="#AA0000" position="2 0 -7" class="clickable"
 			   event-set__enter="_event: mouseenter; material.color: #FF0000"
 			   event-set__leave="_event: mouseleave; material.color: #AA0000"
 			   event-set__tarpos="_event: click; _target: #yellow; position: 2 3 -5">
