@@ -4,65 +4,54 @@
 <head>
     <title>First A-Frame</title>
     <script src="https://aframe.io/releases/1.0.4/aframe.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/gh/donmccurdy/aframe-extras@v6.1.0/dist/aframe-extras.min.js"></script>
 </head>
 
 <body>
     <a-scene>
 
-        <a-camera position="0 1.7 0" look-controls="pointerLockEnabled: true">
-            <a-cursor>
+        <a-assets>
+            <a-asset-item id="hanoi" src="/assets/hanoi.gltf"></a-asset-item>
+            <a-asset-item id="ring0" src="/assets/ring0.gltf"></a-asset-item>
+            <a-asset-item id="ring1" src="/assets/ring1.gltf"></a-asset-item>
+            <a-asset-item id="ring2" src="/assets/ring2.gltf"></a-asset-item>
+            <a-asset-item id="ring3" src="/assets/ring3.gltf"></a-asset-item>
+            <a-asset-item id="ring4" src="/assets/ring4.gltf"></a-asset-item>
+            <a-asset-item id="ring5" src="/assets/ring5.gltf"></a-asset-item>
+        </a-assets>
 
-            </a-cursor>
-
+        <a-camera position="0 1.7 0" look-controls="pointerLockEnabled: false">
+            <a-cursor position="0 0 -0.8"></a-cursor>
         </a-camera>
 
-
         <a-sky color="#d6d6d6"></a-sky>
+
+
+        <a-entity position="0 1.4 -1.5">
+
+            <!----Hanoi tower base --->
+            <a-entity gltf-model="#hanoi" scale="0.5 0.5 0.5" position="0 0 0"></a-entity>
+
+            <!----Hanoi tower rings --->
+            <a-entity gltf-model="#ring0" scale="0.5 0.5 0.5" position="-0.45 0.42 0"></a-entity>
+            <a-entity gltf-model="#ring1" scale="0.5 0.5 0.5" position="-0.45 0.34 0"></a-entity>
+            <a-entity gltf-model="#ring2" scale="0.5 0.5 0.5" position="-0.45 0.26 0"></a-entity>
+            <a-entity gltf-model="#ring3" scale="0.5 0.5 0.5" position="-0.45 0.18 0"></a-entity>
+            <a-entity gltf-model="#ring4" scale="0.5 0.5 0.5" position="-0.45 0.10 0"></a-entity>
+            <a-entity gltf-model="#ring5" scale="0.5 0.5 0.5" position="-0.45 0.02 0"></a-entity>
+
+        </a-entity>
 
         <!---Ground--->
         <a-plane material="color: #d6d6d6; shader: flat" rotation="-90 0 0" scale="100 100 1"></a-plane>
 
-        <a-entity position="0 2 -1" text="value: Tower of Hanoi;
+        <!--<a-entity position="0 2 -1" text="value: Tower of Hanoi;
                             color: black;
                             align: center" ;>
 
-        </a-entity>
+        </a-entity>-->
 
-        <!----Hanoi tower --->
-        <a-entity position="0 1 -1" scale="2 2 2">
-
-            <!----Base---->
-            <a-box color="#383838" width="1.1" height="0.05" depth="0.2" position="0 0 0">
-
-            </a-box>
-
-            <!---Rings--->
-            <a-torus color="#00AAFF" radius="0.1" radius-tubular="0.1" height="0.1" position="0 0.20 0" rotation="90 0 0" scale="0.2 0.2 0.12">
-            </a-torus>
-
-            <a-torus color="#00AA00" radius="0.2" radius-tubular="0.1" height="0.1" position="0 0.15 0" rotation="90 0 0" scale="0.2 0.2 0.12">
-            </a-torus>
-
-            <a-torus color="#FFAA00" radius="0.3" radius-tubular="0.1" height="0.1" position="0 0.1 0" rotation="90 0 0" scale="0.2 0.2 0.12">
-            </a-torus>
-
-            <a-torus color="#AA0000" radius="0.40" radius-tubular="0.1" height="0.1" position="0 0.05 0" rotation="90 0 0" scale="0.2 0.2 0.12">
-            </a-torus>
-
-
-            <!---Poles--->
-            <a-cylinder position="-0.4 0.15 0" height="0.3" radius="0.02" color="brown">
-            </a-cylinder>
-
-            <a-cylinder position="0.4 0.15 0" height="0.3" radius="0.02" color="brown">
-            </a-cylinder>
-
-            <a-cylinder position="0 0.15 0" height="0.3" radius="0.02" color="brown">
-            </a-cylinder>
-
-        </a-entity>
     </a-scene>
-
 </body>
 
 </html>
