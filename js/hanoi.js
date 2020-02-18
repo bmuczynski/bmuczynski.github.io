@@ -9,7 +9,7 @@ AFRAME.registerComponent('tower', {
         el.addEventListener('click', function () {
             
             var pos = el.getAttribute('position');
-            var helper = document.querySelector('a-scene').querySelectorAll('[helper]');
+            var helper = document.querySelector('[helper]').components.helper;
 
             if(pos.x>0){
                 console.log("Prawa wieża");
@@ -21,6 +21,9 @@ AFRAME.registerComponent('tower', {
                 console.log("Lewa wieża");
             }
 
+            console.log(helper);
+
+            helper.popRing();
 
             //this.stack = tempStack;
             
@@ -68,16 +71,16 @@ AFRAME.registerComponent('ring', {
 
     },
 
-    popRing: function(pos){
-        var helper = document.querySelectorAll('[helper]')[0];
-        var newPosition = helper.position;
-        var el = this.el;
+    // popRing: function(pos){
+    //     var helper = document.querySelectorAll('[helper]')[0];
+    //     var newPosition = helper.position;
+    //     var el = this.el;
 
-        console.log(helper);
-        console.log(newPosition)
+    //     console.log(helper);
+    //     console.log(newPosition)
 
-        el.setAttribute('position', newPosition);
-    }
+    //     el.setAttribute('position', newPosition);
+    // }
 
 
 
@@ -85,6 +88,7 @@ AFRAME.registerComponent('ring', {
 
 AFRAME.registerComponent('helper',{
 
+    
     init: function(){
         var el = this.el;
 
@@ -108,8 +112,14 @@ AFRAME.registerComponent('helper',{
         });
 
 
+    },
+
+    popRing: function(){
+        
+        
+        console.log();
     }
-})
+});
 
 AFRAME.registerComponent('manager',{
     schema: {
@@ -126,4 +136,4 @@ AFRAME.registerComponent('manager',{
     }
     
 
-})
+});
