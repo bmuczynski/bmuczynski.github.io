@@ -74,9 +74,9 @@
             "name" : "poles",
             "pbrMetallicRoughness" : {
                 "baseColorFactor" : [
-                    1,
-                    1,
-                    1,
+                    0.4,
+                    0.4,
+                    0.4,
                     1
                 ],
                 "metallicFactor" : 0,
