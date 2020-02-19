@@ -10,7 +10,7 @@ AFRAME.registerComponent('tower', {
     },
 
     events: {
-        click: function (evt) {
+        mousedown: function (evt) {
             var el = this.el;
             var pos = el.getAttribute('position');
             var helper = document.querySelector('#helper').components.helper;
