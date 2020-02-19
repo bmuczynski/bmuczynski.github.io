@@ -25,9 +25,11 @@ AFRAME.registerComponent('tower', {
         }
       },
 
+
     init: function () {
         var el = this.el;
         var data = this.data;
+       
         //poczatkowe zebranie wszystkich ringow na lewej wiezy
         setTimeout(function() {
             var pos = el.getAttribute('position');
