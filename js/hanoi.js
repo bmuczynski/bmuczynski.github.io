@@ -14,14 +14,18 @@ AFRAME.registerComponent('tower', {
 
             var el = this.el;
             var pos = el.getAttribute('position');
-            var helper = document.querySelector('[helper]').components.helper;
-            var currentTower = el.getAttribute('tower');
+            var helper = document.querySelector('#helper').components.helper;
             var data = this.data;
 
-            console.log("--------------click");
-            console.log(helper.data.stack[0].object3D.position.x);
-            console.log(helper.data.stack);
-            console.log(data.stack);
+            // console.log("--------------click");
+            // console.log(helper.data.stack[0].object3D.position.x);
+            // console.log(helper.data.stack);
+            // console.log(data.stack);
+            
+            console.log(helper.data.active);
+
+            if(helper.data.active) helper.popRing(data.stack.pop());
+
         }
       },
 
@@ -58,6 +62,7 @@ AFRAME.registerComponent('tower', {
 
         //przemieszczanie kulki
         el.addEventListener('mouseenter', function() {
+
             var pos = el.object3D.position;
             var helper = document.querySelector('[helper]').components.helper.data.stack;
             // console.log(pos);
@@ -65,7 +70,7 @@ AFRAME.registerComponent('tower', {
             // console.log(helper.object3D.position);
             // console.log(helper);
             console.log(helper);
-
+            console.log(data.stack);
             helper.forEach(element => {
 
                 element.object3D.position.set(pos.x, pos.y + 0.42, pos.z);
@@ -178,11 +183,14 @@ AFRAME.registerComponent('helper', {
         this.data.stack.push(el);
     },
 
-    popRing: function () {
+    popRing: function (ring) {
 
-        var el = this.el
+        var el = this.el;
+        var data = this.data;
 
-        console.log(el.object3D.position);
+        data.stack.push(ring);
+
+        console.log(data.stack);
 
         // if (this.data.active) {
             
