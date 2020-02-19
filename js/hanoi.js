@@ -11,7 +11,6 @@ AFRAME.registerComponent('tower', {
 
     events: {
         click: function (evt) {
-
             var el = this.el;
             var pos = el.getAttribute('position');
             var helper = document.querySelector('#helper').components.helper;
@@ -80,16 +79,16 @@ AFRAME.registerComponent('tower', {
     },
 
 
-    update: function (oldData) {
-        var data = this.data;
-        var el = this.el;
+    // update: function (oldData) {
+    //     var data = this.data;
+    //     var el = this.el;
 
-        if (oldData.onClick !== data.onClick) {
-            el.addEventListener('click', function () {
-                el.setAttribute('tower', 'stack', data.onClick);
-            });
-        }
-    }
+    //     if (oldData.onClick !== data.onClick) {
+    //         el.addEventListener('click', function () {
+    //             el.setAttribute('tower', 'stack', data.onClick);
+    //         });
+    //     }
+    // }
 });
 
 AFRAME.registerComponent('ring', {
