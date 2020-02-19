@@ -12,7 +12,7 @@
 
 <body>
     <a-scene>
-        <a-entity environment="preset: forest"></a-entity>
+        <!--<a-entity environment="preset: forest; dressing:none"></a-entity>-->
         <a-assets>
             <a-asset-item id="hanoi" src="/assets/hanoi.gltf"></a-asset-item>
             <a-asset-item id="ring0" src="/assets/ring0.gltf"></a-asset-item>
@@ -23,7 +23,6 @@
             <a-asset-item id="ring5" src="/assets/ring5.gltf"></a-asset-item>
         </a-assets>
 
-        <a-entity manager></a-entity>
 
         <a-camera position="0 1.7 0" look-controls="pointerLockEnabled: false">
             <a-cursor position="0 0 -0.8"></a-cursor>
@@ -32,54 +31,60 @@
         <!--<a-sky color="#d6d6d6"></a-sky>-->
 
 
-        <a-entity id='helper' helper position="-0.45 1.7 -1.5">
-            <a-sphere radius='0.03' color='green'></a-sphere>
-        </a-entity>
 
-        <a-entity id='tower' position="0 1.0 -1.5">
+
+        <a-entity id='hanoiTower' position="0 1.0 -1.5">
+
+            <a-entity id='helper' helper position="-0.45 0.7 0">
+                <a-sphere radius='0.03' color='green'></a-sphere>
+            </a-entity>
+
 
             <!----Hanoi tower base --->
             <a-entity id='base' gltf-model="#hanoi" scale="0.5 0.5 0.5" position="0 0 0"></a-entity>
 
-
             <a-box id='towerLeft' tower height="0.5" width="0.45" depth="0.45" position="-0.45 0.25 0"
-                material="opacity: 0" event-set__enter="_target: #helper; _event: mouseenter; position:-0.45 1.7 -1.5">
+                material="opacity: 0">
             </a-box>
 
             <a-box id='towerCenter' tower height="0.5" width="0.45" depth="0.45" position="0 0.25 0"
-                material="opacity: 0" event-set__enter="_target: #helper; _event: mouseenter; position:0 1.7 -1.5">
+                material="opacity: 0"></a-box>>
             </a-box>
 
 
             <a-box id='towerRight' tower height="0.5" width="0.45" depth="0.45" position="0.45 0.25 0"
-                material="opacity: 0" event-set__enter="_target: #helper; _event: mouseenter; position:0.45 1.7 -1.5">
-
-                <!--<a-entity id='ring0' ring="size:0; isOnTop: true" gltf-model="#ring0" scale="0.5 0.5 0.5"
-                    position="0 0.17 0"></a-entity>
-                <a-entity id='ring1' ring="size:1" gltf-model="#ring1" scale="0.5 0.5 0.5" position="0 0.09 0">
-                </a-entity>
-                <a-entity id='ring2' ring="size:2" gltf-model="#ring2" scale="0.5 0.5 0.5" position="0 0.01 0">
-                </a-entity>
-                <a-entity id='ring3' ring="size:3" gltf-model="#ring3" scale="0.5 0.5 0.5" position="0 -0.07 0">
-                </a-entity>
-                <a-entity id='ring4' ring="size:4" gltf-model="#ring4" scale="0.5 0.5 0.5" position="0 -0.15 0">
-                </a-entity>
-                <a-entity id='ring5' ring="size:5" gltf-model="#ring5" scale="0.5 0.5 0.5" position="0 -0.23 0">
-                </a-entity>-->
+                material="opacity: 0">
             </a-box>
 
+            <!--
+            <a-box id='towerLeft' tower height="0.5" width="0.45" depth="0.45" position="-0.45 0.25 0"
+                material="opacity: 0" event-set__enter="_target: #helper; _event: mouseenter; position:-0.45 0.7 0"
+                event-set__ring="_target: ; _event: mouseenter; position:-0.45 0.62 0">
+            </a-box>
+
+            <a-box id='towerCenter' tower height="0.5" width="0.45" depth="0.45" position="0 0.25 0"
+                material="opacity: 0" event-set__enter="_target: #helper; _event: mouseenter; position:0 0.7 0"
+                event-set__ring="_target: ; _event: mouseenter; position:0 0.62 0"></a-box>>
+            </a-box>
+
+
+            <a-box id='towerRight' tower height="0.5" width="0.45" depth="0.45" position="0.45 0.25 0"
+                material="opacity: 0" event-set__enter="_target: #helper; _event: mouseenter; position:0.45 0.7 0"
+                event-set__ring="_target: ; _event: mouseenter; position:0.45 0.62 0"</a-box>></a-box>>
+            </a-box>-->
+
             <!----Hanoi tower rings --->
-            <a-entity id='ring0' ring="size:0" gltf-model="#ring0" scale="0.5 0.5 0.5" position="-0.45 0.42 0">
+            <a-entity id='ring_0' ring="size:0" gltf-model="#ring0" scale="0.5 0.5 0.5" position="-0.45 0.42 0">
             </a-entity>
-            <a-entity id='ring1' ring="size:1" gltf-model="#ring1" scale="0.5 0.5 0.5" position="-0.45 0.34 0">
+            <a-entity id='ring_1' ring="size:1" gltf-model="#ring1" scale="0.5 0.5 0.5" position="-0.45 0.34 0">
             </a-entity>
-            <a-entity id='ring2' ring="size:2" gltf-model="#ring2" scale="0.5 0.5 0.5" position="-0.45 0.26 0">
+            <a-entity id='ring_2' ring="size:2" gltf-model="#ring2" scale="0.5 0.5 0.5" position="-0.45 0.26 0">
             </a-entity>
-            <a-entity id='ring3' ring="size:3" gltf-model="#ring3" scale="0.5 0.5 0.5" position="-0.45 0.18 0">
+            <a-entity id='ring_3' ring="size:3" gltf-model="#ring3" scale="0.5 0.5 0.5" position="-0.45 0.18 0">
             </a-entity>
-            <a-entity id='ring4' ring="size:4" gltf-model="#ring4" scale="0.5 0.5 0.5" position="-0.45 0.1 0">
+            <a-entity id='ring_4' ring="size:4" gltf-model="#ring4" scale="0.5 0.5 0.5" position="-0.45 0.1 0">
             </a-entity>
-            <a-entity id='ring5' ring="size:5" gltf-model="#ring5" scale="0.5 0.5 0.5" position="-0.45 0.02 0">
+            <a-entity id='ring_5' ring="size:5" gltf-model="#ring5" scale="0.5 0.5 0.5" position="-0.45 0.02 0">
             </a-entity>
 
 
