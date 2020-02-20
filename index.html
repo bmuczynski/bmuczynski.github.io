@@ -32,6 +32,8 @@
 
         <!--<a-sky color="#d6d6d6"></a-sky>-->
 
+        <a-entity progressive-controls="objects: .clickable"></a-entity>
+
         <!--Hano tower entity-->
         <a-entity id='hanoiTower' position="0 1.0 -1.5">
 
@@ -39,21 +41,19 @@
                 <a-sphere radius='0.03' color='green'></a-sphere>
             </a-entity>
 
-            <a-entity progressive-controls="objects: .clickable"></a-entity>
-
             <!----Hanoi tower base --->
             <a-entity id='base' gltf-model="#hanoi" scale="0.5 0.5 0.5" position="0 0 0"></a-entity>
 
-            <a-box id='towerLeft' tower height="0.7" width="0.35" depth="0.45" position="-0.45 0.35 0"
+            <a-box id='towerLeft' tower hoverable height="0.7" width="0.35" depth="0.45" position="-0.45 0.35 0"
                 material="opacity: 0.0" class="clickable">
             </a-box>
 
-            <a-box id='towerCenter' tower height="0.7" width="0.35" depth="0.45" position="0 0.35 0"
+            <a-box id='towerCenter' tower hoverable height="0.7" width="0.35" depth="0.45" position="0 0.35 0"
                 material="opacity: 0.0" class="clickable"></a-box>>
             </a-box>
 
 
-            <a-box id='towerRight' tower height="0.7" width="0.35" depth="0.45" position="0.45 0.35 0"
+            <a-box id='towerRight' tower hoverable height="0.7" width="0.35" depth="0.45" position="0.45 0.35 0"
                 material="opacity: 0.0" class="clickable">
             </a-box>
 

@@ -65,7 +65,7 @@ AFRAME.registerComponent('tower', {
 
 
         //przemieszczanie kulki
-        el.addEventListener('mouseenter', function () {
+        el.addEventListener('hover-start', function () {
 
             var pos = el.object3D.position;
             var helper = document.querySelector('[helper]').components.helper.data.stack;
