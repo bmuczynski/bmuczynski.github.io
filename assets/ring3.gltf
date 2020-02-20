@@ -34,13 +34,13 @@
             "name" : "ring3",
             "pbrMetallicRoughness" : {
                 "baseColorFactor" : [
-                    0.7,
-                    0.8,
-                    0,
+                    0.027451,
+                    0.419608,
+                    0.027451,
                     1
                 ],
-                "metallicFactor" : 0.5,
-                "roughnessFactor" : 0.5
+                "metallicFactor" : 0.1,
+                "roughnessFactor" : 1
             }
         }
     ],
