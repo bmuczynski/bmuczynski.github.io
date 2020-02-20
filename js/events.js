@@ -7,14 +7,15 @@ AFRAME.registerComponent('tower', {
 
     init: function() {
         var el = this.el;
-        var tester = document.querySelector('#tester').components.tester;
-        //el.addEventListener('click', function(){
+        //var tester = document.querySelector('#tester').components.tester;
+        
+        el.addEventListener('click', function(){
         //tester.testFunction(el);
 
 
-        //el.object3D.position.set(0, 1, -1);
+        el.object3D.position.set(0, 2, -2);
 
-        //});
+        });
 
     },
 
