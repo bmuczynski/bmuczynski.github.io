@@ -39,7 +39,7 @@ AFRAME.registerComponent('tester', {
 
         //var tester = document.querySelector('#tester');
 
-        console.log("Wywolano mnie");
+        console.log("Wywolano mnie pomimo parenta");
         //console.log(tester.components.tester);
     }
 })
