@@ -9,7 +9,10 @@ AFRAME.registerComponent('tower', {
         var el = this.el;
         var tester = document.querySelector('#tester').components.tester;
         el.addEventListener('click', function(){
-            tester.testFunction(el);
+            //tester.testFunction(el);
+
+            el.object3D.position.set(0, 1, -1);
+
         });
         
     },
