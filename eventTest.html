@@ -3,11 +3,11 @@
 
 <head>
     <title>Event test</title>
-    
+
     <script src="https://aframe.io/releases/1.0.4/aframe.min.js"></script>
     <script src="https://unpkg.com/aframe-event-set-component@5.0.0/dist/aframe-event-set-component.min.js"></script>
     <script src="https://cdn.jsdelivr.net/gh/donmccurdy/aframe-extras@v6.1.0/dist/aframe-extras.min.js"></script>
-    <script src="js/events.js"></script>
+    <!--<script src="js/events.js"></script>-->
 </head>
 
 <body>
@@ -19,23 +19,27 @@
 
         <!--<a-sky color="#d6d6d6"></a-sky>-->
 
-        <a-entity id="tester" tester></a-entity>
+        <!--<a-entity id="tester" tester></a-entity>-->
 
         <!--Hano tower entity-->
         <a-entity id='hanoiTower' position="0 1.0 -1.5">
 
             <!----Hanoi tower base --->
 
-            <a-entity id='towerLeft' geometry="primitive: box; width: 0.35; height: 0.7; depth: 0.45" position="-0.45 0.35 0" material="color: red; opacity: 0.6" class="clickable" event-set__move="_event: click; position: 0 1 -1">
+            <a-entity id='towerLeft' geometry="primitive: box; width: 0.35; height: 0.7; depth: 0.45"
+                position="-0.45 0.35 0" material="color: red; opacity: 0.6" class="clickable"
+                event-set__move="_event: click; position: 0 1 -1">
 
             </a-entity>
 
 
-            <a-box id='towerCenter' height="0.7" width="0.35" depth="0.45" position="0 0.35 0" material="color: blue; opacity: 0.6" class="clickable"></a-box>>
+            <a-box id='towerCenter' height="0.7" width="0.35" depth="0.45" position="0 0.35 0"
+                material="color: blue; opacity: 0.6" class="clickable"></a-box>>
             </a-box>
 
 
-            <a-box id='towerRight' height="0.7" width="0.35" depth="0.45" position="0.45 0.35 0" material="color: black; opacity: 0.6" class="clickable">
+            <a-box id='towerRight' height="0.7" width="0.35" depth="0.45" position="0.45 0.35 0"
+                material="color: black; opacity: 0.6" class="clickable">
             </a-box>
 
     </a-scene>
