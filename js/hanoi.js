@@ -9,33 +9,33 @@ AFRAME.registerComponent('tower', {
         }
     },
 
-    events: {
-        mousedown: function (evt) {
-            var el = this.el;
-            var pos = el.getAttribute('position');
-            var helper = document.querySelector('#helper').components.helper;
-            var data = this.data;
+    // events: {
+    //     mousedown: function (evt) {
+    //         var el = this.el;
+    //         var pos = el.getAttribute('position');
+    //         var helper = document.querySelector('#helper').components.helper;
+    //         var data = this.data;
 
-            if (helper.data.active && data.stack.length != 0) {
-                helper.popRing(data.stack.pop());
-            } else if (!helper.data.active) {
-                if (data.stack.length == 0) {
-                    var height = 0.02 + data.stack.length * 0.08;
-                    var ring = helper.pushRing();
+    //         if (helper.data.active && data.stack.length != 0) {
+    //             helper.popRing(data.stack.pop());
+    //         } else if (!helper.data.active) {
+    //             if (data.stack.length == 0) {
+    //                 var height = 0.02 + data.stack.length * 0.08;
+    //                 var ring = helper.pushRing();
 
-                    data.stack.push(ring);
-                    ring.object3D.position.set(pos.x, height, pos.z);
-                } else if (helper.data.stack[helper.data.stack.length - 1].components.ring.data.size < data.stack[data.stack.length - 1].components.ring.data.size) {
-                    var height = 0.02 + data.stack.length * 0.08;
-                    var ring = helper.pushRing();
+    //                 data.stack.push(ring);
+    //                 ring.object3D.position.set(pos.x, height, pos.z);
+    //             } else if (helper.data.stack[helper.data.stack.length - 1].components.ring.data.size < data.stack[data.stack.length - 1].components.ring.data.size) {
+    //                 var height = 0.02 + data.stack.length * 0.08;
+    //                 var ring = helper.pushRing();
 
-                    data.stack.push(ring);
-                    ring.object3D.position.set(pos.x, height, pos.z);
-                }
-            }
+    //                 data.stack.push(ring);
+    //                 ring.object3D.position.set(pos.x, height, pos.z);
+    //             }
+    //         }
 
-        }
-    },
+    //     }
+    // },
 
 
     init: function () {
@@ -76,19 +76,32 @@ AFRAME.registerComponent('tower', {
             });
 
         });
+
+        el.addEventListener('click', function(){
+            
+            var pos = el.object3D.position;
+            var helper = document.querySelector('#helper').components.helper;
+
+
+            if (helper.data.active && data.stack.length != 0) {
+                helper.popRing(data.stack.pop());
+            } else if (!helper.data.active) {
+                if (data.stack.length == 0) {
+                    var height = 0.02 + data.stack.length * 0.08;
+                    var ring = helper.pushRing();
+
+                    data.stack.push(ring);
+                    ring.object3D.position.set(pos.x, height, pos.z);
+                } else if (helper.data.stack[helper.data.stack.length - 1].components.ring.data.size < data.stack[data.stack.length - 1].components.ring.data.size) {
+                    var height = 0.02 + data.stack.length * 0.08;
+                    var ring = helper.pushRing();
+
+                    data.stack.push(ring);
+                    ring.object3D.position.set(pos.x, height, pos.z);
+                }
+            }
+        });
     },
-
-
-    // update: function (oldData) {
-    //     var data = this.data;
-    //     var el = this.el;
-
-    //     if (oldData.onClick !== data.onClick) {
-    //         el.addEventListener('click', function () {
-    //             el.setAttribute('tower', 'stack', data.onClick);
-    //         });
-    //     }
-    // }
 });
 
 AFRAME.registerComponent('ring', {
