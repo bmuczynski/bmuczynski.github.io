@@ -1,27 +1,28 @@
 AFRAME.registerComponent('tower', {
-    
 
-    events:{
+
+    events: {
 
     },
 
-    init:function(){
+    init: function() {
         var el = this.el;
         var tester = document.querySelector('#tester').components.tester;
-        el.addEventListener('click', function(){
-            //tester.testFunction(el);
+        //el.addEventListener('click', function(){
+        //tester.testFunction(el);
 
-            el.object3D.position.set(0, 1, -1);
 
-        });
-        
-    },
+        //el.object3D.position.set(0, 1, -1);
 
-    update:function(){
+        //});
 
     },
 
-    testFunction:function(){
+    update: function() {
+
+    },
+
+    testFunction: function() {
 
         //var tester = document.querySelector('#tester');
 
@@ -30,8 +31,8 @@ AFRAME.registerComponent('tower', {
     }
 })
 
-AFRAME.registerComponent('tester',{
-    testFunction:function(element){
+AFRAME.registerComponent('tester', {
+    testFunction: function(element) {
 
         element.object3D.position.set(0, 1, -1);
 
