@@ -7,14 +7,14 @@
         <script src="https://unpkg.com/aframe-event-set-component@5.0.0/dist/aframe-event-set-component.min.js"></script>
         <!--<script src="https://cdn.jsdelivr.net/gh/donmccurdy/aframe-extras@v6.1.0/dist/aframe-extras.min.js"></script>-->
         <!--<script src="js/events.js"></script>-->
+        <script src="https://unpkg.com/super-hands@3.0.0/dist/super-hands.min.js"></script>
+        <script src="js/progressive-controls.js"></script>
     </head>
 
     <body>
         <a-scene>
 
-            <a-camera position="0 1.7 0" look-controls="pointerLockEnabled: false">
-                <a-cursor raycaster="far: 20; interval: 50; objects: .clickable" position="0 0 -0.8"></a-cursor>
-            </a-camera>
+            <a-entity progressive-controls="objects: .clickable"></a-entity>
 
             <a-entity id='towerLeft' geometry="primitive: box; width: 0.35; height: 0.7; depth: 0.45"
                 position="-0.45 1.35 -1.5" material="color: red; opacity: 0.6" class="clickable"
