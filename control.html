@@ -6,9 +6,9 @@
     <script src="https://aframe.io/releases/1.0.4/aframe.min.js"></script>
     <script src="https://cdn.jsdelivr.net/gh/donmccurdy/aframe-extras@v6.1.0/dist/aframe-extras.min.js"></script>
     <script src="https://unpkg.com/aframe-environment-component@1.1.0/dist/aframe-environment-component.min.js"></script>
-    <script src="js/hanoi.js"></script>
-    <script src="https://unpkg.com/super-hands@3.0.0/dist/super-hands.min.js"></script>
-    <script src="js/progressive-controls.js"></script>
+    <script src="js/hanoialt.js"></script>
+    <!-- <script src="https://unpkg.com/super-hands@3.0.0/dist/super-hands.min.js"></script>
+    <script src="js/progressive-controls.js"></script> -->
 </head>
 
 <body>
@@ -26,34 +26,41 @@
         </a-assets>
 
 
-        <a-camera id="zwykla kamera" position="0 1.7 0" look-controls="pointerLockEnabled: false">
-            <a-cursor raycaster="far: 20; interval: 50; objects: .clickable" position="0 0 -0.8"></a-cursor>
-        </a-camera>
-        <a-entity laser-controls="hand: right"  raycaster="objects: .clickable; far: 10"></a-entity>
-        <a-entity laser-controls="hand: left"></a-entity>
 
-        <!-- <a-entity>
-            <a-camera></a-camera>
-            <a-entity sphere-collider="objects: a-box" super-hands hand-controls="left"></a-entity>
-            <a-entity sphere-collider="objects: a-box" super-hands hand-controls="right"></a-entity>
-          </a-entity> -->
-
-        <!--<a-sky color="#d6d6d6"></a-sky>-->
-        <!-- <a-entity id="progressive" progressive-controls="objects: .clickable"></a-entity> -->
-        <!-- <a-entity tracked-controls></a-entity> -->
-
-        <!-- <a-entity camera="" position="0 1.6 0" wasd-controls="" look-controls="" aframe-injected="" data-aframe-inspector-original-camera="">
-
-
-        </a-entity> -->
-
-
-
-    <!-- <a-entity oculus-touch-controls="hand: left"></a-entity>
-    <a-entity oculus-touch-controls="hand: right"></a-entity> -->
+        <a-entity id="cameraRig" position="0 0 -1.1 ">
+            <a-entity
+              id="head"
+              camera
+              wasd-controls
+              look-controls
+              position="0 1.6 1.1"
+            >
+            </a-entity>
+            <a-entity
+              id="ctlL"
+              teleport-controls="cameraRig: #cameraRig; teleportOrigin: #head; startEvents: teleportstart; endEvents: teleportend; collisionEntities: .scenery; defaultPlaneSize: 1000"
+              raycaster="objects: .clickable; far:1.5;"
+              laser-controls="hand: left"
+            >
+    
+            </a-entity>
+            <a-entity
+              id="ctlR"
+              raycaster="objects: .clickable; far:1.5;"
+              laser-controls="hand: right"
+            >
+            </a-entity>
+    
+            <a-entity
+              id="mouseCursor"
+              cursor="rayOrigin: mouse"
+              raycaster="objects: .clickable"
+            >
+            </a-entity>
+          </a-entity>
 
         <!--Hano tower entity-->
-        <a-entity id='hanoiTower' position="0 1.0 -1.5">
+        <a-entity id='hanoiTower' position="0 0.5 -1.5">
 
             <a-entity id='helper' helper position="0 0.7 0">
                 <a-sphere radius='0.03' color='green'></a-sphere>
