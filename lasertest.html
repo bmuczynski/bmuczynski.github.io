@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="icon" href="data:;base64,iVBORw0KGgo=" />
+
+    <title>minimal example</title>
+    <script src="https://aframe.io/releases/1.0.4/aframe.min.js"></script>
+    <script src="https://unpkg.com/aframe-environment-component@1.1.0/dist/aframe-environment-component.min.js"></script>
+
+    <script>
+      AFRAME.registerComponent("button", {
+        init: function() {
+          this.active = false;
+          this.waiting = false;
+          this.el.addEventListener("raycaster-intersected", evt => {
+            this.raycaster = evt.detail.el;
+          });
+          this.el.addEventListener("raycaster-intersected-cleared", evt => {
+            this.raycaster = null;
+          });
+          this.el.addEventListener("mouseenter", evt => {
+            this.el.getObject3D("mesh").material.opacity = 0.6;
+          });
+          this.el.addEventListener("mouseleave", evt => {
+            this.el.getObject3D("mesh").material.opacity = 0.2;
+          });
+          this.el.addEventListener("mousedown", evt => {
+            this.doClick();
+            console.log("mousedown ", this.active);
+          });
+        },
+        doClick: function() {
+        
+        // UNCOMMENT THIS TO MAKE It WORK
+          if (this.waiting) {
+            console.log("sorry, no ...");
+            return;
+          }
+                    this.waiting = true;
+          setTimeout(() => {
+            this.waiting = false;
+            console.log("reset ...");
+          }, 100);
+
+          if (this.active === true) {
+            this.el.getObject3D("mesh").material.color = new THREE.Color(
+              "#0000ff"
+            );
+          } else {
+            this.el.getObject3D("mesh").material.color = new THREE.Color(
+              "#00ff00"
+            );
+          }
+          console.log("CLICK ", this.active);
+          this.active = !this.active;
+        },
+
+        tick: function() {
+          if (!this.raycaster) {
+            return;
+          } // Not intersecting.
+
+          let intersection = this.raycaster.components.raycaster.getIntersection(
+            this.el
+          );
+          if (!intersection) {
+            return;
+          }
+          // console.log(intersection.point);
+        }
+      });
+    </script>
+  </head>
+
+  <body>
+    <a-scene
+      shadow="enabled:false; type: pcfsoft"
+      renderer="colorManagement: true;"
+      background="color: lightblue;"
+    >
+      <a-entity
+        environment="preset: tron; dressingAmount: 0; playArea: 10"
+      ></a-entity>
+
+      <a-entity id="cameraRig">
+        <a-entity
+          id="head"
+          camera
+          wasd-controls
+          look-controls
+          position="0 1.6 0"
+        >
+        </a-entity>
+        <a-entity
+          id="ctlL"
+          teleport-controls="cameraRig: #cameraRig; teleportOrigin: #head; startEvents: teleportstart; endEvents: teleportend; collisionEntities: .scenery; defaultPlaneSize: 1000"
+          raycaster="objects: .collidable; far:1.2;"
+          laser-controls="hand: left"
+        >
+
+        </a-entity>
+        <a-entity
+          id="ctlR"
+          raycaster="objects: .collidable; far:1.2;"
+          laser-controls="hand: right"
+        >
+        </a-entity>
+
+        <a-entity
+          id="mouseCursor"
+          cursor="rayOrigin: mouse"
+          raycaster="objects: .collidable"
+        >
+        </a-entity>
+      </a-entity>
+
+      <a-entity
+        button
+        class="collidable"
+        geometry="primitive: box;"
+        material="side: double; color: #0000ff; transparent: true; opacity: 0.3"
+        position="0 1 -1.5"
+        scale="1 1 1"
+      >
+      </a-entity>
+    </a-scene>
+  </body>
+</html>

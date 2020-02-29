@@ -77,6 +77,18 @@ AFRAME.registerComponent('tower', {
 
         });
 
+        el.addEventListener('raycaster-intersected', function () {
+
+            var pos = el.object3D.position;
+            var helper = document.querySelector('[helper]').components.helper.data.stack;
+            helper.forEach(element => {
+
+                element.object3D.position.set(pos.x, pos.y + 0.35, pos.z);
+
+            });
+
+        });
+
         el.addEventListener('click', function(){
             
             var pos = el.object3D.position;
