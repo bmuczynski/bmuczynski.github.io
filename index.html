@@ -2,18 +2,22 @@
 <html>
 
 <head>
-    <title>First A-Frame</title>
+    <title>Tower of Hanoi</title>
     <script src="https://aframe.io/releases/1.0.4/aframe.min.js"></script>
     <script src="https://cdn.jsdelivr.net/gh/donmccurdy/aframe-extras@v6.1.0/dist/aframe-extras.min.js"></script>
     <script src="https://unpkg.com/aframe-environment-component@1.1.0/dist/aframe-environment-component.min.js"></script>
-    <script src="js/hanoi.js"></script>
-    <script src="https://unpkg.com/super-hands@3.0.0/dist/super-hands.min.js"></script>
-    <script src="js/progressive-controls.js"></script>
+    <script src="js/hanoialt.js"></script>
+    <script src="js/aframe-particle-system-component.min.js"></script>
 </head>
 
 <body>
-    <a-scene>
-        <a-entity environment="preset:threetowers; "></a-entity>
+    <a-scene vr-switcher>
+        <a-entity environment="preset:threetowers; 
+          skyType:atmosphere; 
+          lightPosition: 1 5 0; 
+          lighting: point; 
+          shadow:false;
+          flatShading: true"></a-entity>
         
         <a-assets>
             <a-asset-item id="hanoi" src="/assets/hanoi.gltf"></a-asset-item>
@@ -26,15 +30,44 @@
         </a-assets>
 
 
-        <!-- <a-camera position="0 1.7 0" look-controls="pointerLockEnabled: false">
-            <a-cursor raycaster="far: 20; interval: 50; objects: .clickable" position="0 0 -0.8"></a-cursor>
-        </a-camera> -->
 
-        <!--<a-sky color="#d6d6d6"></a-sky>-->
-        <a-entity progressive-controls="objects: .clickable"></a-entity>
+        <a-entity id="cameraRig" position="0 0 0">
+            <a-entity
+              id="head"
+              camera
+              wasd-controls
+              look-controls
+              position="0 1.6 0"
+            >
+            <a-entity
+            id="mouseCursor"
+            cursor="rayOrigin: mouse;"
+            position="0 0 -1"
+            geometry="primitive: ring; radiusInner: 0.02; radiusOuter: 0.03"
+            material="color: black; shader: flat; visible:false"
+            raycaster="objects: .clickable">
+            </a-entity>
+            </a-entity>
+            <a-entity
+              id="ctlL"
+              raycaster="objects: .clickable; far:1.5;"
+              laser-controls="hand: left"
+            >
+    
+            </a-entity>
+            <a-entity
+              id="ctlR"
+              raycaster="objects: .clickable; far:1.5;"
+              laser-controls="hand: right"
+            >
+            </a-entity>
+    
 
+            
+          </a-entity>
+          <a-entity id='particle' position="0 2.25 -15"></a-entity>
         <!--Hano tower entity-->
-        <a-entity id='hanoiTower' position="0 1.0 -1.5">
+        <a-entity id='hanoiTower' position="0 0.8 -1.5">
 
             <a-entity id='helper' helper position="0 0.7 0">
                 <a-sphere radius='0.03' color='green'></a-sphere>
@@ -45,6 +78,7 @@
 
             <a-box id='towerLeft' tower hoverable height="0.7" width="0.35" depth="0.45" position="-0.45 0.35 0"
                 material="opacity: 0.0" class="clickable">
+                
             </a-box>
 
             <a-box id='towerCenter' tower hoverable height="0.7" width="0.35" depth="0.45" position="0 0.35 0"
@@ -74,14 +108,11 @@
 
         </a-entity>
 
-        <!---Ground--
-        <a-plane material="color: #d6d6d6; shader: flat" rotation="-90 0 0" scale="100 100 1"></a-plane>-->
-
-        <!--<a-entity position="0 2 -1" text="value: Tower of Hanoi;
+        <!-- <a-entity position="0 2 -1" text="value: Tower of Hanoi;
                             color: black;
                             align: center" ;>
 
-        </a-entity>-->
+        </a-entity> -->
 
     </a-scene>
 </body>

@@ -1,3 +1,29 @@
+AFRAME.registerComponent('vr-switcher', {
+
+    init: function () {
+        var scene = document.querySelector('a-scene');
+
+        scene.addEventListener('enter-vr', function () {
+            if (AFRAME.utils.device.isMobile()) {
+                //alert("Mobile device!");
+                document.querySelector('#mouseCursor').setAttribute('material', 'visible: true');
+                document.querySelector('#mouseCursor').setAttribute('cursor', 'rayOrigin: entity');
+            }
+        });
+
+        scene.addEventListener('exit-vr', function () {
+            document.querySelector('#head').object3D.position.set(0, 1.6, 0);
+            document.querySelector('#mouseCursor').setAttribute('material', 'visible: false');
+            document.querySelector('#mouseCursor').setAttribute('cursor', 'rayOrigin: mouse');
+
+        });
+
+    }
+
+});
+
+
+
 AFRAME.registerComponent('tower', {
     schema: {
         stack: {
@@ -6,41 +32,40 @@ AFRAME.registerComponent('tower', {
         },
         number: {
             type: 'number'
+        },
+        isStartingTower: {
+            type: 'boolean',
+            default: false
         }
     },
-
-    // events: {
-    //     mousedown: function (evt) {
-    //         var el = this.el;
-    //         var pos = el.getAttribute('position');
-    //         var helper = document.querySelector('#helper').components.helper;
-    //         var data = this.data;
-
-    //         if (helper.data.active && data.stack.length != 0) {
-    //             helper.popRing(data.stack.pop());
-    //         } else if (!helper.data.active) {
-    //             if (data.stack.length == 0) {
-    //                 var height = 0.02 + data.stack.length * 0.08;
-    //                 var ring = helper.pushRing();
-
-    //                 data.stack.push(ring);
-    //                 ring.object3D.position.set(pos.x, height, pos.z);
-    //             } else if (helper.data.stack[helper.data.stack.length - 1].components.ring.data.size < data.stack[data.stack.length - 1].components.ring.data.size) {
-    //                 var height = 0.02 + data.stack.length * 0.08;
-    //                 var ring = helper.pushRing();
-
-    //                 data.stack.push(ring);
-    //                 ring.object3D.position.set(pos.x, height, pos.z);
-    //             }
-    //         }
-
-    //     }
-    // },
-
 
     init: function () {
         var el = this.el;
         var data = this.data;
+        this.active = false;
+        this.waiting = false;
+
+
+        this.el.addEventListener("raycaster-intersected", evt => {
+            this.raycaster = evt.detail.el;
+        });
+
+        this.el.addEventListener("raycaster-intersected-cleared", evt => {
+            this.raycaster = null;
+        });
+
+        this.el.addEventListener("mouseenter", evt => {
+
+            var pos = el.object3D.position;
+            var helper = document.querySelector('[helper]').components.helper.data.stack;
+            helper.forEach(element => {
+
+                element.object3D.position.set(pos.x, pos.y + 0.35, pos.z);
+
+            });
+        });
+
+        this.el.addEventListener("mouseleave", evt => {});
 
         //poczatkowe zebranie wszystkich ringow na lewej wiezy
         setTimeout(function () {
@@ -53,29 +78,15 @@ AFRAME.registerComponent('tower', {
                 var tempStack = new Array(6);
 
                 rings.forEach(element => {
-                   
+
                     tempStack[rings.length - 1 - element.getAttribute('ring').size] = element;
                 });
 
                 data.stack = tempStack;
-
+                data.isStartingTower = true;
             }
 
         }, 1000);
-
-
-        //przemieszczanie kulki
-        el.addEventListener('hover-start', function () {
-
-            var pos = el.object3D.position;
-            var helper = document.querySelector('[helper]').components.helper.data.stack;
-            helper.forEach(element => {
-
-                element.object3D.position.set(pos.x, pos.y + 0.35, pos.z);
-
-            });
-
-        });
 
         el.addEventListener('raycaster-intersected', function () {
 
@@ -89,30 +100,60 @@ AFRAME.registerComponent('tower', {
 
         });
 
-        el.addEventListener('click', function(){
-            
+        el.addEventListener('mousedown', function () {
+
             var pos = el.object3D.position;
             var helper = document.querySelector('#helper').components.helper;
-
 
             if (helper.data.active && data.stack.length != 0) {
                 helper.popRing(data.stack.pop());
             } else if (!helper.data.active) {
+
                 if (data.stack.length == 0) {
                     var height = 0.02 + data.stack.length * 0.08;
                     var ring = helper.pushRing();
 
                     data.stack.push(ring);
                     ring.object3D.position.set(pos.x, height, pos.z);
+                    
                 } else if (helper.data.stack[helper.data.stack.length - 1].components.ring.data.size < data.stack[data.stack.length - 1].components.ring.data.size) {
                     var height = 0.02 + data.stack.length * 0.08;
                     var ring = helper.pushRing();
 
                     data.stack.push(ring);
                     ring.object3D.position.set(pos.x, height, pos.z);
+                    
+                    if (!data.isStartingTower) {
+                        if (data.stack.length == 6) {
+                            el.components.tower.gameWon();
+                        }
+                    }
                 }
             }
         });
+    },
+
+    gameWon: function () {
+        
+        document.querySelector('#particle').object3D.position.set(0, 0, -15);
+        document.querySelector('#particle').setAttribute('particle-system', {
+            color: "#EF0000, #44CC00",
+            velocityValue: "0 25 0",
+            velocitySpread: "10 7.5 10",
+            size: 1,
+            accelerationSpread: "10 0 10",
+            accelerationValue: "0 -10 0",
+            positionSpread: "0.1 0.1 0.1",
+            particleCount: 1000,
+            dragValue: 0.2,
+            maxAge: 6,
+            blending: 2
+        });
+
+        setTimeout(function () {
+            document.querySelector('#hanoiTower').object3D.visible = false;
+
+        }, 500);
     },
 });
 
@@ -167,5 +208,7 @@ AFRAME.registerComponent('helper', {
 
         data.active = true;
         return data.stack.pop();
-    }
+    },
+
+
 });
