@@ -6,6 +6,10 @@ AFRAME.registerComponent('tower', {
         },
         number: {
             type: 'number'
+        },
+        isStartingTower:{
+            type: 'boolean',
+            default: false
         }
     },
 
@@ -18,15 +22,12 @@ AFRAME.registerComponent('tower', {
 
         this.el.addEventListener("raycaster-intersected", evt => {
             this.raycaster = evt.detail.el;
-            console.log("Raycaster wlazl");
           });
         this.el.addEventListener("raycaster-intersected-cleared", evt => {
             this.raycaster = null;
-            console.log("Raycaster wylazl i nie wrocil");
           });
         this.el.addEventListener("mouseenter", evt => {
             
-            console.log("Mysz weszla");
             var pos = el.object3D.position;
             var helper = document.querySelector('[helper]').components.helper.data.stack;
             helper.forEach(element => {
@@ -36,7 +37,6 @@ AFRAME.registerComponent('tower', {
             });
         });
         this.el.addEventListener("mouseleave", evt => {
-            console.log("Mysz wyszla");
         });
 
         //poczatkowe zebranie wszystkich ringow na lewej wiezy
@@ -55,7 +55,7 @@ AFRAME.registerComponent('tower', {
                 });
 
                 data.stack = tempStack;
-
+                data.isStartingTower = true;
             }
 
         }, 1000);
@@ -80,19 +80,56 @@ AFRAME.registerComponent('tower', {
 
             if (helper.data.active && data.stack.length != 0) {
                 helper.popRing(data.stack.pop());
-            } else if (!helper.data.active) {
+            } 
+            else if (!helper.data.active) {
+                
                 if (data.stack.length == 0) {
                     var height = 0.02 + data.stack.length * 0.08;
                     var ring = helper.pushRing();
 
                     data.stack.push(ring);
                     ring.object3D.position.set(pos.x, height, pos.z);
-                } else if (helper.data.stack[helper.data.stack.length - 1].components.ring.data.size < data.stack[data.stack.length - 1].components.ring.data.size) {
+                    console.log(data.stack);
+                    if(!data.isStartingTower){
+                        if(data.stack.length == 2){
+                            console.log("WYGRAŁEŚ!!!!")
+                            document.querySelector('#particle').object3D.position.set(pos.x, 1.4, -1.6);
+                            document.querySelector('#particle').setAttribute('particle-system', {color: "#EF0000, #44CC00", 
+                            velocityValue: "0 15 0", 
+                            size: 0.2,
+                            accelerationValue: "0 -30 0",
+                            positionSpread: "0.1 0.1 0.1",
+                            particleCount: 500 });
+
+                        }
+                    }
+                } 
+                
+                else if (helper.data.stack[helper.data.stack.length - 1].components.ring.data.size < data.stack[data.stack.length - 1].components.ring.data.size) {
                     var height = 0.02 + data.stack.length * 0.08;
                     var ring = helper.pushRing();
 
                     data.stack.push(ring);
                     ring.object3D.position.set(pos.x, height, pos.z);
+                    console.log(data.stack);
+                    if(!data.isStartingTower){
+                        if(data.stack.length == 2){
+                            console.log("WYGRAŁEŚ!!!!")
+                            document.querySelector('#particle').object3D.position.set(pos.x, 0, -15);
+                            document.querySelector('#particle').setAttribute('particle-system', {color: "#EF0000, #44CC00", 
+                            velocityValue: "0 25 0", 
+                            velocitySpread: "10 7.5 10",
+                            size: 1,
+                            accelerationSpread: "10 0 10",
+                            accelerationValue: "0 -10 0",
+                            positionSpread: "0.1 0.1 0.1",
+                            particleCount: 1000,
+                            dragValue: 0.2,
+                            maxAge: 6,
+                            blending: 2 });
+
+                        }
+                    }
                 }
             }
         });
