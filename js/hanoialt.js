@@ -1,3 +1,33 @@
+AFRAME.registerComponent('vr-switcher', {
+
+init: function(){
+    var scene = document.querySelector('a-scene');
+
+   scene.addEventListener('enter-vr', function () {
+
+        console.log("entered vr");
+        if(AFRAME.utils.device.isMobile ()){
+            alert("Mobile device!");
+            document.querySelector('#mouseCursor').setAttribute('material', 'visible: true');
+            document.querySelector('#mouseCursor').setAttribute('cursor', 'rayOrigin: entity');
+        }                                                                                   
+     });
+
+     scene.addEventListener('exit-vr', function () {
+
+        console.log("exited vr");
+        document.querySelector('#head').object3D.position.set(0, 1.6, 0);
+        document.querySelector('#mouseCursor').setAttribute('material', 'visible: false');
+        document.querySelector('#mouseCursor').setAttribute('cursor', 'rayOrigin: mouse');
+                                                                                        
+     });
+
+}
+
+});
+
+
+
 AFRAME.registerComponent('tower', {
     schema: {
         stack: {
