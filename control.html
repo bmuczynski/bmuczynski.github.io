@@ -16,7 +16,7 @@
           skyType:atmosphere; 
           lightPosition: 1 5 0; 
           lighting: point; 
-          shadow:true;
+          shadow:false;
           flatShading: true"></a-entity>
         
         <a-assets>
@@ -43,7 +43,7 @@
             id="mouseCursor"
             cursor="rayOrigin: mouse;"
             position="0 0 -1"
-            geometry="primitive: ring; radiusInner: 0.02; radiusOuter: 0.03"
+            geometry="primitive: ring; radiusInner: 0.02; radiusOuter: 0.03; visible:false "
             material="color: black; shader: flat"
             raycaster="objects: .clickable"
           >

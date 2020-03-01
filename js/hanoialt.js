@@ -7,7 +7,7 @@ init: function(){
 
         console.log("entered vr");
         if(AFRAME.utils.device.isMobile ()){
-            alert("Mobile device!");
+            //alert("Mobile device!");
             document.querySelector('#mouseCursor').setAttribute('material', 'visible: true');
             document.querySelector('#mouseCursor').setAttribute('cursor', 'rayOrigin: entity');
         }                                                                                   
@@ -120,19 +120,19 @@ AFRAME.registerComponent('tower', {
                     data.stack.push(ring);
                     ring.object3D.position.set(pos.x, height, pos.z);
                     console.log(data.stack);
-                    if(!data.isStartingTower){
-                        if(data.stack.length == 2){
-                            console.log("WYGRAŁEŚ!!!!")
-                            document.querySelector('#particle').object3D.position.set(pos.x, 1.4, -1.6);
-                            document.querySelector('#particle').setAttribute('particle-system', {color: "#EF0000, #44CC00", 
-                            velocityValue: "0 15 0", 
-                            size: 0.2,
-                            accelerationValue: "0 -30 0",
-                            positionSpread: "0.1 0.1 0.1",
-                            particleCount: 500 });
+                    // if(!data.isStartingTower){
+                    //     if(data.stack.length == 2){
+                    //         console.log("WYGRAŁEŚ!!!!")
+                    //         document.querySelector('#particle').object3D.position.set(pos.x, 1.4, -1.6);
+                    //         document.querySelector('#particle').setAttribute('particle-system', {color: "#EF0000, #44CC00", 
+                    //         velocityValue: "0 15 0", 
+                    //         size: 0.2,
+                    //         accelerationValue: "0 -30 0",
+                    //         positionSpread: "0.1 0.1 0.1",
+                    //         particleCount: 500 });
 
-                        }
-                    }
+                    //     }
+                    // }
                 } 
                 
                 else if (helper.data.stack[helper.data.stack.length - 1].components.ring.data.size < data.stack[data.stack.length - 1].components.ring.data.size) {
@@ -143,7 +143,7 @@ AFRAME.registerComponent('tower', {
                     ring.object3D.position.set(pos.x, height, pos.z);
                     console.log(data.stack);
                     if(!data.isStartingTower){
-                        if(data.stack.length == 2){
+                        if(data.stack.length == 3){
                             console.log("WYGRAŁEŚ!!!!")
                             document.querySelector('#particle').object3D.position.set(pos.x, 0, -15);
                             document.querySelector('#particle').setAttribute('particle-system', {color: "#EF0000, #44CC00", 
