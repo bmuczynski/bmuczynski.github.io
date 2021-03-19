@@ -119,11 +119,11 @@
       // Cursor
       let hideCursor = function() {
         cursor.removeAttribute('animation__cursorHideLeave');
-        cursor.setAttribute('animation__cursorHideEnter', "property: scale; from: 0.6 0.6 0.6; to: 0 0 0; dur: 300; easing: easeInQuad;");
+        cursor.setAttribute('animation__cursorHideEnter', "property: scale; from: 0.6 0.6 0.6; to: 0.00001 0.00001 0.00001; dur: 300; easing: easeInQuad;");
       }
       let showCursor = function() {
         cursor.removeAttribute('animation__cursorHideEnter');
-        cursor.setAttribute('animation__cursorHideLeave', "property: scale; from: 0 0 0; to: 0.6 0.6 0.6; dur: 300; easing: easeInQuad;");
+        cursor.setAttribute('animation__cursorHideLeave', "property: scale; from: 0.00001 0.00001 0.00001; to: 0.6 0.6 0.6; dur: 300; easing: easeInQuad;");
       }
       document.querySelector('#video-screen').addEventListener('mouseenter', hideCursor);
       document.querySelector('#video-screen').addEventListener('mouseleave', showCursor);
